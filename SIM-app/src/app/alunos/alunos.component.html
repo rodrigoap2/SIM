@@ -23,6 +23,7 @@
 <tr *ngFor="let a of alunos">
    <td>{{a.nome}}</td>
    <td>{{a.login}}</td>
+   <td><button (click)="deletarAluno(a)">Remover</button></td>
 </tr>
 </table>
 

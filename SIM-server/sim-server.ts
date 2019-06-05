@@ -31,6 +31,16 @@ app.post('/aluno', function (req: express.Request, res: express.Response) {
   }
 })
 
+app.delete('/deletarAluno', function (req: express.Request, res: express.Response){
+  var aluno = req.body;
+  var removido = cadastro.deletar(aluno);
+  if (removido) {
+    res.send({"success": "O aluno foi removido com sucesso"});
+  } else {
+    res.send({"failure": "O aluno foi não pôde ser removido"});
+  }
+})
+
 app.put('/aluno', function (req: express.Request, res: express.Response) {
   var aluno: Aluno = <Aluno> req.body;
   aluno = cadastro.atualizar(aluno);

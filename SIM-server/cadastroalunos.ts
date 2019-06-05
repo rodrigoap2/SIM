@@ -13,6 +13,16 @@ export class CadastroAlunos {
     return result;
   }
 
+  deletar(aluno: Aluno): boolean {
+    var result: Aluno = this.alunos.find(a => a.login == aluno.login);
+    var saida: boolean = false;
+    if (result){
+      this.alunos.splice(this.alunos.indexOf(result), 1);
+      saida = true;
+    } 
+    return saida;
+  }
+
   loginNaoCadastrado(login: string): boolean {
      return !this.alunos.find(a => a.login == login);
   }

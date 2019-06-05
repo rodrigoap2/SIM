@@ -1,5 +1,7 @@
 import { Injectable }    from '@angular/core';
 import { Http, Headers } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 
 import { Aluno } from './aluno';
 
@@ -7,12 +9,12 @@ import { Aluno } from './aluno';
 export class AlunoService {
 
   private headers = new Headers({'Content-Type': 'application/json'});
-  private taURL = 'http://localhost:3000';
+  private simURL = 'http://localhost:3000';
 
   constructor(private http: Http) { }
 
   criar(aluno: Aluno): Promise<Aluno> {
-    return this.http.post(this.taURL + "/aluno",JSON.stringify(aluno), {headers: this.headers})
+    return this.http.post(this.simURL + "/aluno",JSON.stringify(aluno), {headers: this.headers})
            .toPromise()
            .then(res => {
               if (res.json().success) {return aluno;} else {return null;}
@@ -20,8 +22,17 @@ export class AlunoService {
            .catch(this.tratarErro);
   }
 
+  deletar(aluno: Aluno): Promise<Aluno> {
+  return this.http.delete(this.simURL + "/deletarAluno", {headers: this.headers, body: JSON.stringify(aluno)})
+    .toPromise()
+    .then(res => {
+      if (res.json().success) {return aluno;} else {return null;}
+    })
+    .catch(this.tratarErro);
+  }
+
   atualizar(aluno: Aluno): Promise<Aluno> {
-    return this.http.put(this.taURL + "/aluno",JSON.stringify(aluno), {headers: this.headers})
+    return this.http.put(this.simURL + "/aluno",JSON.stringify(aluno), {headers: this.headers})
          .toPromise()
          .then(res => {
             if (res.json().success) {return aluno;} else {return null;}
@@ -30,7 +41,7 @@ export class AlunoService {
   }
 
   getAlunos(): Promise<Aluno[]> {
-    return this.http.get(this.taURL + "/alunos")
+    return this.http.get(this.simURL + "/alunos")
              .toPromise()
              .then(res => res.json() as Aluno[])
              .catch(this.tratarErro);
