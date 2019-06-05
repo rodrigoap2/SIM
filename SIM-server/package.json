@@ -1,0 +1,19 @@
+{
+  "name": "ta-server",
+  "version": "0.0.1",
+  "description": "Servidor do Sistema integrado de monitoria",
+  "main": "sim-server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rodrigo Albuquerque",
+  "license": "MIT",
+  "dependencies": {
+    "@types/body-parser": "^1.16.5",
+    "@types/express": "^4.0.37",
+    "body-parser": "^1.18.2",
+    "express": "^4.15.4",
+    "nodemailer": "^6.1.1"
+  },
+  "devDependencies": {}
+}
