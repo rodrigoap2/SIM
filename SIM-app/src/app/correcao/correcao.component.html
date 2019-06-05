@@ -31,7 +31,9 @@
    <td class="meta"><input [(ngModel)]="a.criterios['camadaFachada']" (change)="atualizarAluno(a)"></td>
    <td class="meta"><input [(ngModel)]="a.criterios['programaTeste']" (change)="atualizarAluno(a)"></td>
    <td *ngIf="temConceitosErrados">
-     Existem conceitos com notas inválidas
+     <script>
+		alert("Existe um conceito errado");
+	</script>
    </td>
 </tr>
 </table>

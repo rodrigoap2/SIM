@@ -2,11 +2,13 @@ import express = require('express');
 import bodyParser = require("body-parser");
 import { Aluno } from '../SIM-app/src/app/alunos/aluno';
 import {CadastroAlunos} from './cadastroalunos';
+import {CadastroCriterios} from './cadastroCriterios';
 
 import fs = require('fs');
 var app = express();
 
 var cadastro: CadastroAlunos = new CadastroAlunos();
+var cadastroCriterios: CadastroCriterios = new CadastroCriterios();
 var allowCrossDomain = function(req: any, res: any, next: any) {
     res.header('Access-Control-Allow-Origin', "*");
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -19,6 +21,20 @@ app.use(bodyParser.json());
 
 app.get('/alunos', function (req, res) {
   res.send(JSON.stringify(cadastro.getAlunos()));
+})
+
+app.get('/criterio', function (req, res) {
+  res.send(cadastroCriterios.getCriterios());
+})
+
+app.post('/criterio', function (req: express.Request, res: express.Response) {
+  var criterio: string = req.body.criterio;
+  criterio = cadastroCriterios.criar(criterio);
+  if (criterio) {
+    res.send({"success": "O criterio foi cadastrado com sucesso"});
+  } else {
+    res.send({"failure": "O criterio não pode ser cadastrado"});
+  }
 })
 
 app.post('/aluno', function (req: express.Request, res: express.Response) {
@@ -38,6 +54,16 @@ app.delete('/deletarAluno', function (req: express.Request, res: express.Respons
     res.send({"success": "O aluno foi removido com sucesso"});
   } else {
     res.send({"failure": "O aluno foi não pôde ser removido"});
+  }
+})
+
+app.delete('/deletarCriterio', function (req: express.Request, res: express.Response){
+  var criterio = req.body.criterio;
+  var removido = cadastroCriterios.deletar(criterio);
+  if (removido) {
+    res.send({"success": "O criterio foi removido com sucesso"});
+  } else {
+    res.send({"failure": "O criterio foi não pôde ser removido"});
   }
 })
 

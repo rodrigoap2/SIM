@@ -1,0 +1,21 @@
+<html (mousemove)="onMove()">
+<table>
+<tr>
+   <td><label>Nome </label></td>
+   <td><input [(ngModel)]="criterio" ></td>
+   <td><button (click)="criarCriterio(criterio)">Criar</button></td>
+   <td *ngIf="criterioDuplicado">
+     Critério já cadastrado
+   </td>
+</tr>
+</table>
+<table>
+<tr>
+   <th>Critérios atuais</th>
+</tr>
+<tr *ngFor="let a of criterios">
+   <td>{{a}}</td>
+   <td><button (click)="deletarCriterio(a)">Remover</button></td>
+</tr>
+</table>
+</html>

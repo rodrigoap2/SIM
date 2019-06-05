@@ -13,6 +13,8 @@ import { CorrecaoComponent } from './correcao/correcao.component';
 import { LoginComponent } from './login/login.component';
 import { AlunosComponent } from './alunos/alunos.component';
 import { AlunoService } from './alunos/aluno.service';
+import { CriteriosComponent } from './criterios/criterios.component';
+import { CriteriosService } from './criterios/criterios.service';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { AlunoService } from './alunos/aluno.service';
     AlocacaoComponent,
     CorrecaoComponent,
     LoginComponent,
-    AlunosComponent
+    AlunosComponent,
+    CriteriosComponent
   ],
   imports: [
     BrowserModule,
@@ -37,10 +40,14 @@ import { AlunoService } from './alunos/aluno.service';
       {
         path: 'correcao',
         component: CorrecaoComponent
+      },
+      {
+        path: 'criterios',
+        component: CriteriosComponent
       }
     ])
   ],
-  providers: [AlunoService],
+  providers: [AlunoService,CriteriosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
