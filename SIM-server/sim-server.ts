@@ -1,12 +1,12 @@
 import express = require('express');
 import bodyParser = require("body-parser");
 import { Aluno } from '../SIM-app/src/app/alunos/aluno';
-import {CadastroDeAlunos} from './cadastroalunos';
+import {CadastroAlunos} from './cadastroalunos';
 
 import fs = require('fs');
 var app = express();
 
-var cadastro: CadastroDeAlunos = new CadastroDeAlunos();
+var cadastro: CadastroAlunos = new CadastroAlunos();
 var allowCrossDomain = function(req: any, res: any, next: any) {
     res.header('Access-Control-Allow-Origin', "*");
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
