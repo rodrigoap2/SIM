@@ -36,8 +36,7 @@ export class Aluno {
   verificaAluno(): string[]{
     var conceitos: string[] = [];
     for (let key in this.criterios) {
-      if(this.criterios[key] >= 0 && this.criterios[key] <= 10){
-      }else{
+      if(this.criterios[key] <= 0 || this.criterios[key] > 10){
         this.criterios[key] = '';
         conceitos.push(key);
       }

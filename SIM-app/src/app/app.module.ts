@@ -15,6 +15,7 @@ import { AlunosComponent } from './alunos/alunos.component';
 import { AlunoService } from './alunos/aluno.service';
 import { CriteriosComponent } from './criterios/criterios.component';
 import { CriteriosService } from './criterios/criterios.service';
+import { RelatorioComponent } from './relatório/relatorio.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CriteriosService } from './criterios/criterios.service';
     CorrecaoComponent,
     LoginComponent,
     AlunosComponent,
-    CriteriosComponent
+    CriteriosComponent,
+    RelatorioComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +46,10 @@ import { CriteriosService } from './criterios/criterios.service';
       {
         path: 'criterios',
         component: CriteriosComponent
+      },
+      {
+        path: 'relatorio',
+        component: RelatorioComponent
       }
     ])
   ],
