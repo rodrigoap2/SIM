@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { Aluno } from '../alunos/aluno';
 import { AlunoService } from '../alunos/aluno.service';
+import { CriteriosService } from '../criterios/criterios.service';
 
 @Component({
   selector: 'app-correcao',
@@ -11,30 +12,22 @@ import { AlunoService } from '../alunos/aluno.service';
 })
 export class CorrecaoComponent implements OnInit {
 
-constructor(private alunoService: AlunoService) {}
+constructor(private alunoService: AlunoService, private criterioService: CriteriosService) {}
 
    alunos: Aluno[];
-   conceitosErrados: string = '';
-   temConceitosErrados: boolean = false;
+   criteriosPossiveis: String[];
 
    atualizarAluno(aluno: Aluno): void {
       this.alunoService.atualizar(aluno);
-      var erros: string[] = aluno.verificaAluno();
-      if(erros.length == 0){
-      	this.temConceitosErrados = false;
-      	this.conceitosErrados = '';
-      }else{
-      	for (let key in erros) {
-      		this.conceitosErrados = this.conceitosErrados + ' ' + key;
-      	}
-      	this.temConceitosErrados = true;
-      }
    }
 
    ngOnInit(): void {
       this.alunoService.getAlunos()
          .then(alunos => this.alunos = alunos)
          .catch(erro => alert(erro));
+      this.criterioService.getCriterios()
+         .then(criterios => this.criteriosPossiveis = criterios)
+         .catch(erro => alert(erro));
    }
-
 }
+
