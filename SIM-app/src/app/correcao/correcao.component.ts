@@ -22,7 +22,7 @@ constructor(private alunoService: AlunoService, private criterioService: Criteri
   atualizarAluno(aluno: Aluno): void {
       console.log(aluno.nome);
       this.criteriosErrados = this.verificaConceitos(aluno);
-      console.log(this.criteriosErrados[0]);
+      console.log(this.criteriosPossiveis[0]);
       if(this.criteriosErrados.length == 0){
         this.temConceitosErrados = false;
         this.alunoService.atualizar(aluno);

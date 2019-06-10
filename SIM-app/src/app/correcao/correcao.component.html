@@ -11,9 +11,9 @@
 	<td *ngFor="let criterio of criteriosPossiveis;">
 	<input [(ngModel)]="aluno.criterios[criterio]"></td>
 	<td><button (click)="atualizarAluno(aluno)">Adicionar</button></td>
+</tr>
 	<td *ngIf="temConceitosErrados">
 	Erro: Existem critérios com nota menor que 0 ou maior que 10
    </td>
-</tr>
 </table>
 </html>
