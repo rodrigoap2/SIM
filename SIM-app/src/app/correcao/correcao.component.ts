@@ -56,4 +56,3 @@ constructor(private alunoService: AlunoService, private criterioService: Criteri
       this.temConceitosErrados = false;
   }
 }
-

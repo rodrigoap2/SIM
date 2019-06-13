@@ -15,7 +15,7 @@ export class RelatorioComponent implements OnInit {
 constructor(private alunoService: AlunoService, private criterioService: CriteriosService) {}
 
   alunos: Aluno[];
-  criteriosPossiveis: String[];
+  criteriosPossiveis: string[];
   mediaCriterios: Map<string,number> = new Map<string,number>();
   jaGerouRelatorio: boolean = false;
 
