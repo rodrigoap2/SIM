@@ -5,7 +5,7 @@
    <th>Login</th>
    <th *ngFor="let criterio of criteriosPossiveis;">{{criterio}}</th>
 </tr>
-	<tr *ngFor="let aluno of alunos;">
+	<tr name="alunoList" *ngFor="let aluno of alunos;">
 	   <td>{{aluno.nome}}</td>
 	   <td>{{aluno.login}}</td>
 	<td *ngFor="let criterio of criteriosPossiveis;">
