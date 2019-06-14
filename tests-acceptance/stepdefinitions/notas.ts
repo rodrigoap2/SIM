@@ -17,14 +17,14 @@ defineSupportCode(function ({ Given, When, Then }) {
     Given(/^eu estou na página de cadastro de notas$/, async () => {
         await browser.get("http://localhost:4200/");
         await expect(browser.getTitle()).to.eventually.equal('SIMApp');
-        await $("a[name='cadastroNotas']").click;
+        await $("a[name='correcao']").click;
     });
 
     Given(/^o aluno "([^\"]*)" foi cadastrado com login "([^\"]*)"$/, async (nome,login) => {
         await $("a[name='alunos']").click;
         await $("input[name='nomeAluno']").sendKeys(<string> nome);
         await $("input[name='loginAluno']").sendKeys(<string> login);
-        await $("a[name='cadastroNotas']").click;
+        await $("a[name='alunos']").click;
     });
 
     Given(/^o critério "([^\"]*)" foi cadastrado com peso caracterizado como "(\d*)"$/, async (nome,peso) => {
