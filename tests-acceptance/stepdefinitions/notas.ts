@@ -46,4 +46,8 @@ defineSupportCode(function ({ Given, When, Then }) {
         allalunos.filter(elem => pAND(sameNota(elem,nota),sameName(elem,name)))
         .then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
     });
+
+    Then(/^uma mensagem de erro é visualizada$/, async () => {
+        expect(element(by.name('erro')).getText()).toBe('Erro: Existem critérios com nota menor que 0 ou maior que 10');
+    });
 });
