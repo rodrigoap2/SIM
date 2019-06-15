@@ -3,13 +3,13 @@
 <tr>
    <th>Nome</th>
    <th>Login</th>
-   <th *ngFor="let criterio of criteriosPossiveis;">{{criterio}}</th>
+   <th *ngFor="let criterio of criteriosPossiveis;">{{criterio.nome}}</th>
 </tr>
 	<tr name="alunoList" *ngFor="let aluno of alunos;">
 	   <td>{{aluno.nome}}</td>
 	   <td>{{aluno.login}}</td>
 	<td *ngFor="let criterio of criteriosPossiveis;">
-	<input [(ngModel)]="aluno.criterios[criterio]"></td>
+	<input [(ngModel)]="aluno.criterios[criterio.nome]"></td>
 	<td><button (click)="atualizarAluno(aluno)">Adicionar</button></td>
 </tr>
 	<td *ngIf="temConceitosErrados">

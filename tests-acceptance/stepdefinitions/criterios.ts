@@ -15,12 +15,13 @@ defineSupportCode(function ({ Given, When, Then }) {
     Given(/^eu estou na página de cadastro de critérios$/, async () => {
         await browser.get("http://localhost:4200/");
         await expect(browser.getTitle()).to.eventually.equal('SIMApp');
-        await $("a[name='criterios']").click;
+        await $("a[name='criterios']").click();
     });
 
     When(/^eu cadastro o critério "([^\"]*)" com peso caracterizado como "(\d*)"/, async (nome,peso) => {
         await $("input[name='criterioNomeInput']").sendKeys(<string> nome);
         await $("input[name='criterioPesoInput']").sendKeys(<string> peso);
+        await element(by.name("botaoCriarCriterio")).click();
     });
 
      Then(/^eu vejo "([^\"]*)" como critério com peso "(\d*)"$/, async (nome,peso) => {

@@ -20,7 +20,7 @@ describe("O cadastro de criterios", () => {
     expect(cadastro.getCriterios().length).toBe(1);
   })
 
-  it("Atualiza alunos corretamente", () => {
+  it("Atualiza criterios corretamente", () => {
     expect(cadastro.getCriterios().length).toBe(0);
     var criterio: Criterio = new Criterio();
     criterio.nome = "Uso de pacotes";

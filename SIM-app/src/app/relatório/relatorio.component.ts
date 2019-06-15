@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { Aluno } from '../alunos/aluno';
 import { AlunoService } from '../alunos/aluno.service';
 import { CriteriosService } from '../criterios/criterios.service';
+import { Criterio } from '../criterios/criterio';
 
 @Component({
   selector: 'app-relatorio',
@@ -15,7 +16,7 @@ export class RelatorioComponent implements OnInit {
 constructor(private alunoService: AlunoService, private criterioService: CriteriosService) {}
 
   alunos: Aluno[];
-  criteriosPossiveis: string[];
+  criteriosPossiveis: Criterio[];
   mediaCriterios: Map<string,number> = new Map<string,number>();
   jaGerouRelatorio: boolean = false;
 
@@ -26,12 +27,12 @@ constructor(private alunoService: AlunoService, private criterioService: Criteri
       var numPessoas: number = 0;
       for (let aluno in this.alunos) {
         numPessoas = numPessoas + 1;
-        valorCriterio = valorCriterio + Number(this.alunos[aluno].criterios[this.criteriosPossiveis[contadorCriterios]]);
+        valorCriterio = valorCriterio + (Number(this.alunos[aluno].criterios[this.criteriosPossiveis[contadorCriterios].nome]));
       }
       if(numPessoas != 0){
-        this.mediaCriterios[this.criteriosPossiveis[contadorCriterios] + ""] = valorCriterio/numPessoas;
+        this.mediaCriterios[this.criteriosPossiveis[contadorCriterios].nome + ""] = valorCriterio/numPessoas;
       }else{
-        this.mediaCriterios[this.criteriosPossiveis[contadorCriterios] + ""] = 0;
+        this.mediaCriterios[this.criteriosPossiveis[contadorCriterios].nome + ""] = 0;
       }
       contadorCriterios = contadorCriterios + 1;
     }

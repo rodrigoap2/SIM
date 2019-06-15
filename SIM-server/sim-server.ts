@@ -3,6 +3,7 @@ import bodyParser = require("body-parser");
 import { Aluno } from '../SIM-app/src/app/alunos/aluno';
 import {CadastroAlunos} from './cadastroalunos';
 import {CadastroCriterios} from './cadastroCriterios';
+import { Criterio } from '../SIM-app/src/app/criterios/criterio';
 
 import fs = require('fs');
 var app = express();
@@ -28,7 +29,7 @@ app.get('/criterio', function (req, res) {
 })
 
 app.post('/criterio', function (req: express.Request, res: express.Response) {
-  var criterio: string = req.body.criterio;
+  var criterio: Criterio = <Criterio> req.body;
   criterio = cadastroCriterios.criar(criterio);
   if (criterio) {
     res.send({"success": "O criterio foi cadastrado com sucesso"});
@@ -58,7 +59,7 @@ app.delete('/deletarAluno', function (req: express.Request, res: express.Respons
 })
 
 app.delete('/deletarCriterio', function (req: express.Request, res: express.Response){
-  var criterio = req.body.criterio;
+  var criterio = req.body;
   var removido = cadastroCriterios.deletar(criterio);
   if (removido) {
     res.send({"success": "O criterio foi removido com sucesso"});
@@ -74,6 +75,16 @@ app.put('/aluno', function (req: express.Request, res: express.Response) {
     res.send({"success": "O aluno foi atualizado com sucesso"});
   } else {
     res.send({"failure": "O aluno não pode ser atualizado"});
+  }
+})
+
+app.put('/criterio', function (req: express.Request, res: express.Response) {
+  var criterio: Criterio = <Criterio> req.body;
+  criterio = cadastroCriterios.atualizar(criterio);
+  if (criterio) {
+    res.send({"success": "O criterio foi atualizado com sucesso"});
+  } else {
+    res.send({"failure": "O criterio não pode ser atualizado"});
   }
 })
 

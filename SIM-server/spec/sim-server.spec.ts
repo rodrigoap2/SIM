@@ -79,10 +79,10 @@ describe("O servidor", () => {
     return request.post(base_url + "criterio", {"json":{"nome": "Uso de heranca", "peso" : "2"}}).then(body => {
          expect(body).toEqual({"success": "O criterio foi cadastrado com sucesso"});
          return request.put(base_url + "criterio", {"json":{"nome": "Uso de heranca", "peso" : "1"}}).then(body => {
-             expect(body).toEqual({"success": "O aluno foi atualizado com sucesso"});
+             expect(body).toEqual({"success": "O criterio foi atualizado com sucesso"});
              return request.get(base_url + "criterio").then(body => {
                  expect(body).not.toContain('{"nome": "Uso de heranca", "peso" : "2"}');
-                 expect(body).toContain('{"nome": "Uso de heranca", "peso" : "1"}');
+                 expect(body).toContain('{"nome":"Uso de heranca","peso":"1"}');
              });
          });
      });

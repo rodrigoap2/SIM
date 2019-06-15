@@ -3,6 +3,8 @@ import { Http, Headers } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 
+import { Criterio } from './criterio';
+
 @Injectable()
 export class CriteriosService {
 
@@ -11,8 +13,8 @@ export class CriteriosService {
 
   constructor(private http: Http) { }
 
-  criar(criterio : string): Promise<string> {
-    return this.http.post(this.simURL + "/criterio",{criterio : criterio}, {headers: this.headers})
+  criar(criterio : Criterio): Promise<Criterio> {
+    return this.http.post(this.simURL + "/criterio",JSON.stringify(criterio), {headers: this.headers})
            .toPromise()
            .then(res => {
               if (res.json().success) {return criterio;} else {return null;}
@@ -20,8 +22,8 @@ export class CriteriosService {
            .catch(this.tratarErro);
   }
 
-  deletar(criterio : string): Promise<string> {
-  return this.http.delete(this.simURL + "/deletarCriterio", {headers: this.headers, body: {criterio: criterio}})
+  deletar(criterio : Criterio): Promise<Criterio> {
+  return this.http.delete(this.simURL + "/deletarCriterio", {headers: this.headers, body: JSON.stringify(criterio)})
     .toPromise()
     .then(res => {
       if (res.json().success) {return criterio;} else {return null;}
@@ -29,10 +31,19 @@ export class CriteriosService {
     .catch(this.tratarErro);
   }
 
-  getCriterios(): Promise<string[]> {
+  atualizar(criterio: Criterio): Promise<Criterio> {
+    return this.http.put(this.simURL + "/criterio",JSON.stringify(criterio), {headers: this.headers})
+         .toPromise()
+         .then(res => {
+            if (res.json().success) {return criterio;} else {return null;}
+         })
+         .catch(this.tratarErro);
+  }
+
+  getCriterios(): Promise<Criterio[]> {
     return this.http.get(this.simURL + "/criterio")
              .toPromise()
-             .then(res => res.json() as string[])
+             .then(res => res.json() as Criterio[])
              .catch(this.tratarErro);
   }
 

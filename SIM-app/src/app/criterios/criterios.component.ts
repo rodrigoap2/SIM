@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
 
-import { CriteriosService } from '../criterios/criterios.service';
+import { CriteriosService } from './criterios.service';
+import { Criterio } from './criterio';
 
 @Component({
   selector: 'app-criterios',
@@ -12,11 +13,12 @@ export class CriteriosComponent implements OnInit {
 
 constructor(private criteriosService: CriteriosService) {}
 
-   criterios: string[];
+   criterios: Criterio[];
    criterioDuplicado : boolean = false;
+   criterio: Criterio = new Criterio();
 
-   criarCriterio(criterio: string): void {
-     this.criteriosService.criar(criterio)
+   criarCriterio(c: Criterio): void {
+     this.criteriosService.criar(c)
         .then(ab => {
            if (ab) {
               this.criterios.push(ab);
@@ -27,11 +29,11 @@ constructor(private criteriosService: CriteriosService) {}
         .catch(erro => alert(erro));
    }
 
-    deletarCriterio(criterio: string): void {
-      this.criteriosService.deletar(criterio)
+    deletarCriterio(c: Criterio): void {
+      this.criteriosService.deletar(c)
       .then(ab => {
          if (ab) {
-            var result: string = this.criterios.find(k => k == criterio);
+            var result: Criterio = this.criterios.find(k => k.nome == c.nome);
             this.criterios.splice(this.criterios.indexOf(result), 1);
          }
       })
