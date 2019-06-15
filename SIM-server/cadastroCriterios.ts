@@ -1,3 +1,4 @@
+import { Criterio } from '../SIM-app/src/app/criterios/criterio';
 export class CadastroCriterios {
   criterios: string[] = [];
 
@@ -18,6 +19,10 @@ export class CadastroCriterios {
       saida = true;
     } 
     return saida;
+  }
+
+  atualizar(criterio: Criterio): void{
+
   }
 
   criterioNaoCadastrado(criterio: string): boolean {
