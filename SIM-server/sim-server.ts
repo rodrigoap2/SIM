@@ -40,7 +40,7 @@ app.post('/criterio', function (req: express.Request, res: express.Response) {
 app.post('/aluno', function (req: express.Request, res: express.Response) {
   var aluno: Aluno = <Aluno> req.body;
   aluno = cadastro.criar(aluno);
-  if (aluno) {
+  if (aluno != null) {
     res.send({"success": "O aluno foi cadastrado com sucesso"});
   } else {
     res.send({"failure": "O aluno não pode ser cadastrado"});
@@ -77,8 +77,12 @@ app.put('/aluno', function (req: express.Request, res: express.Response) {
   }
 })
 
-app.listen(3000, function () {
+var server = app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
 
-export { app }
+function closeServer(): void {
+   server.close();
+}
+
+export { app,server,closeServer }
