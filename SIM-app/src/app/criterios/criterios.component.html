@@ -18,9 +18,9 @@
    <th>Critério</th>
    <th>Peso</th>
 </tr>
-<tr *ngFor="let a of criterios">
-   <td>{{a.nome}}</td>
-   <td>{{a.peso}}</td>
+<tr name='criterioList' *ngFor="let a of criterios">
+   <td id='criterioNome'>{{a.nome}}</td>
+   <td id='criterioPeso'>{{a.peso}}</td>
    <td><button (click)="deletarCriterio(a)">Remover</button></td>
 </tr>
 </table>
