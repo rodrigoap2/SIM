@@ -44,26 +44,21 @@ defineSupportCode(function ({ Given, When, Then }) {
         await browser.get("http://localhost:4200/");
         await expect(browser.getTitle()).to.eventually.equal('SIMApp');
         await $("a[name='correcao']").click();
-        var allalunos : ElementArrayFinder = element.all(by.id('alunos')); 
-        await allalunos;
-        var aluno = allalunos.filter(elem => sameSome(elem,nome,'alunoNome'));
-        await aluno.then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
-        var findCriterio = aluno.all(by.name('allCriterios'));
-        await findCriterio;
         var nota2 = <string> nota;
         var nomeInput = <string> nome + <string> criterio;
         await $("input[ng-reflect-name='"+nomeInput+"']").sendKeys(<string> nota);
-        //await $("input[name='{{aluno.nome}}{{criterio.nome}}']").sendKeys(<string> nota);
         await element(by.name("botaoAdicionar" + <string>nome)).click();
      });
 
-    Then(/^é possível ver o campo "([^\"]*)" como "(\d*)"$/, async (nome,nota) => {
-        var allalunos : ElementArrayFinder = element.all(by.name('alunoList'));
-        allalunos.filter(elem => pAND(sameNota(elem,nota,nome),sameName(elem,nome)))
-        .then(elems => expect(Promise.resolve(elems.length)).to.eventually.equal(1));
+    Then(/^é possível ver o campo nota do aluno "([^\"]*)" como "(\d*)"$/, async (nomeAluno,nota) => {
+        let notaAluno = element(by.id('alunoNota'+nomeAluno));
+        await notaAluno;
+        expect(notaAluno.getText()).to.eventually.equal(nota);
     });
 
     Then(/^uma mensagem de erro é visualizada$/, async () => {
-        expect(element(by.name('erro')).getText()).toBe('Erro: Existem critérios com nota menor que 0 ou maior que 10 ou vazios');
+        var msgErro : string = "Erro: Existem critérios com nota menor que 0 ou maior que 10 ou vazios";
+        var elem = element(by.css('[ng-if="temConceitosErrados"]'));
+        expect(elem.isPresent());
     });
 });
