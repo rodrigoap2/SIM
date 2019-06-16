@@ -8,6 +8,7 @@ class Aluno {
         this.nome = "";
         this.login = "";
         this.criterios = new Map();
+        this.nota = 0;
     }
     clone() {
         var aluno = new Aluno();
@@ -18,6 +19,7 @@ class Aluno {
     copyFrom(from) {
         this.nome = from.nome;
         this.login = from.login;
+        this.nota = from.nota;
         this.copyCriteriosFrom(from.criterios);
     }
     copyCriteriosFrom(from) {

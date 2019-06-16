@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "cucumber-html-reporter": "^4.0.5",
-    "protractor": "^5.1.2",
+    "protractor": "^5.4.1",
     "ts-node": "^3.1.0"
   }
 }

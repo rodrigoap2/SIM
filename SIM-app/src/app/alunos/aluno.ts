@@ -2,6 +2,7 @@ export class Aluno {
   nome: string;
   login: string;
   criterios: Map<string,number>;
+  nota: number;
 
   constructor() {
     this.clean();
@@ -11,6 +12,7 @@ export class Aluno {
     this.nome = "";
     this.login = "";
     this.criterios = new Map<string,number>();
+    this.nota = 0;
   }
 
   clone(): Aluno {
@@ -23,6 +25,7 @@ export class Aluno {
   copyFrom(from: Aluno): void {
     this.nome = from.nome;
     this.login = from.login;
+    this.nota = from.nota;
     this.copyCriteriosFrom(from.criterios);
   }
 

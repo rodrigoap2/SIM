@@ -3,14 +3,17 @@
 <tr>
    <th>Nome</th>
    <th>Login</th>
+   <th name='alunoNota'>Nota</th>
    <th *ngFor="let criterio of criteriosPossiveis;">{{criterio.nome}}</th>
 </tr>
-	<tr name="alunoList" *ngFor="let aluno of alunos;">
-	   <td>{{aluno.nome}}</td>
+	<tr *ngFor="let aluno of alunos" id='alunos'>
+	   <td name='alunoNome'>{{aluno.nome}}</td>
 	   <td>{{aluno.login}}</td>
-	<td *ngFor="let criterio of criteriosPossiveis;">
-	<input [(ngModel)]="aluno.criterios[criterio.nome]"></td>
-	<td><button (click)="atualizarAluno(aluno)">Adicionar</button></td>
+	   <td id='alunoNota{{aluno.nome}}'>{{aluno.nota}}</td>
+	<td *ngFor="let criterio of criteriosPossiveis;" name='allCriterios'>
+	<input [(ngModel)]="aluno.criterios[criterio.nome]" name="{{aluno.nome}}{{criterio.nome}}">
+	</td>
+	<td name='botaoAdicionar'><button (click)="atualizarAluno(aluno)" name='botaoAdicionar{{aluno.nome}}'>Adicionar</button></td>
 </tr>
 	<td *ngIf="temConceitosErrados">
 	Erro: Existem critérios com nota menor que 0 ou maior que 10

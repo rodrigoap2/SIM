@@ -19,11 +19,13 @@ constructor(private alunoService: AlunoService, private criterioService: Criteri
    criteriosPossiveis: Criterio[];
    temConceitosErrados: boolean = false;
    criteriosErrados: string[];
+   
 
   atualizarAluno(aluno: Aluno): void {
       this.criteriosErrados = this.verificaConceitos(aluno);
       if(this.criteriosErrados.length == 0){
         this.temConceitosErrados = false;
+        aluno.nota = this.calculaNota(aluno);
         this.alunoService.atualizar(aluno);
       }else{
         this.temConceitosErrados = true;
@@ -40,6 +42,18 @@ constructor(private alunoService: AlunoService, private criterioService: Criteri
       }
     }
     return conceitos;
+  }
+
+  calculaNota(aluno: Aluno) : number{
+    var notaAtual : number = 0;
+    var pesoTotal : number = 0;
+    for (let key in aluno.criterios) {
+      var criterioAtual = this.criteriosPossiveis.find(a => a.nome == key);
+      pesoTotal = pesoTotal + Number(criterioAtual.peso);
+      notaAtual = (aluno.criterios[key] * criterioAtual.peso) + notaAtual;
+    }
+    notaAtual = notaAtual/pesoTotal;
+    return notaAtual;
   }
 
   ngOnInit(): void {
