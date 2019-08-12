@@ -22,6 +22,7 @@ constructor(private alunoService: AlunoService, private criterioService: Criteri
    
 
   atualizarAluno(aluno: Aluno): void {
+      console.log(aluno.criterios);
       this.criteriosErrados = this.verificaConceitos(aluno);
       if(this.criteriosErrados.length == 0){
         this.temConceitosErrados = false;
@@ -34,7 +35,18 @@ constructor(private alunoService: AlunoService, private criterioService: Criteri
 
   verificaConceitos(aluno: Aluno): string[]{
     var conceitos: string[] = [];
+    if(aluno.criterios.size != this.criteriosPossiveis.length){
+      for(let i = 0; i < this.criteriosPossiveis.length; i++){
+        if(aluno.criterios[this.criteriosPossiveis[i].nome] == undefined){
+          console.log(this.criteriosPossiveis[i].nome);
+          aluno.criterios[this.criteriosPossiveis[i].nome] = 0;
+        }
+      }
+      this.alunoService.atualizar(aluno);
+    }
+    console.log(aluno.criterios);
     for (let key in aluno.criterios) {
+      console.log(key);
       if(aluno.criterios[key] < 0 || aluno.criterios[key] > 10){
         conceitos.push(key);
       }else if(aluno.criterios[key] == ''){
@@ -50,9 +62,11 @@ constructor(private alunoService: AlunoService, private criterioService: Criteri
     for (let key in aluno.criterios) {
       var criterioAtual = this.criteriosPossiveis.find(a => a.nome == key);
       pesoTotal = pesoTotal + Number(criterioAtual.peso);
+      if(aluno.criterios[key] >= 0 && aluno.criterios[key] <= 1)
+      aluno.criterios[key] = aluno.criterios[key] * 10;
       notaAtual = (aluno.criterios[key] * criterioAtual.peso) + notaAtual;
     }
-    notaAtual = notaAtual/pesoTotal;
+    notaAtual = (notaAtual)/pesoTotal;
     return notaAtual;
   }
 

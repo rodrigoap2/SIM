@@ -11,7 +11,7 @@
 	   <td>{{aluno.login}}</td>
 	   <td id='alunoNota{{aluno.nome}}'>{{aluno.nota}}</td>
 	<td *ngFor="let criterio of criteriosPossiveis;" name='allCriterios'>
-	<input [(ngModel)]="aluno.criterios[criterio.nome]" name="{{aluno.nome}}{{criterio.nome}}">
+	<input type="checkbox" [(ngModel)]="aluno.criterios[criterio.nome]"/>
 	</td>
 	<td name='botaoAdicionar'><button (click)="atualizarAluno(aluno)" name='botaoAdicionar{{aluno.nome}}'>Adicionar</button></td>
 </tr>
